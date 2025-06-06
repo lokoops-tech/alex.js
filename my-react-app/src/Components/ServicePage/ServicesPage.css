@@ -1,0 +1,161 @@
+/* src/pages/ServicesPage.css */
+
+.services-page {
+    /* Basic padding */
+}
+
+/* Services Hero Banner */
+.services-hero-banner {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background-image: url('/images/services-hero-bg.jpg'); /* !!! IMPORTANT: Replace with actual image path !!! */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--color-light-text);
+    overflow: hidden;
+}
+
+.services-hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+.services-hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+}
+
+.services-hero-title {
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--color-light-text);
+}
+
+.services-hero-subtitle {
+    font-size: 1.3em;
+    color: var(--color-light-text);
+}
+
+/* Services List Section */
+.services-list-section {
+    padding: 80px 0;
+    background-color: var(--color-background-light);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 30px;
+}
+
+/* Services CTA Banner */
+.services-cta-banner {
+    background-color: var(--color-primary-blue); /* Blue background for CTA */
+    color: var(--color-light-text);
+    padding: 80px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.services-cta-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2); /* Subtle overlay */
+    z-index: 1;
+}
+
+.services-cta-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.services-cta-content h2 {
+    font-size: 2.8em;
+    color: var(--color-light-text); /* White heading */
+    margin-bottom: 20px;
+}
+
+.services-cta-content p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    color: var(--color-light-text); /* White text */
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .services-hero-title {
+        font-size: 2.5em;
+    }
+    .services-hero-subtitle {
+        font-size: 1.1em;
+    }
+    .services-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+    .services-cta-content h2 {
+        font-size: 2.2em;
+    }
+    .services-cta-content p {
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 768px) {
+    .services-hero-banner {
+        height: 250px;
+    }
+    .services-hero-title {
+        font-size: 2em;
+    }
+    .services-hero-subtitle {
+        font-size: 1em;
+    }
+    .services-list-section,
+    .services-cta-banner {
+        padding: 60px 0;
+    }
+    .services-grid {
+        grid-template-columns: 1fr; /* Stack services on small screens */
+    }
+    .services-cta-content h2 {
+        font-size: 1.8em;
+    }
+    .services-cta-content p {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .services-hero-banner {
+        height: 200px;
+    }
+    .services-hero-title {
+        font-size: 1.6em;
+    }
+    .services-hero-subtitle {
+        font-size: 0.9em;
+    }
+    .services-list-section,
+    .services-cta-banner {
+        padding: 40px 0;
+    }
+}

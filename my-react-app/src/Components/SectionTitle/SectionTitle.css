@@ -1,0 +1,71 @@
+/* src/components/SectionTitle.css */
+
+.section-title-container {
+    text-align: center;
+    margin-bottom: 60px; /* Space below the title */
+    padding: 0 15px; /* Horizontal padding for responsiveness */
+}
+
+.section-subtitle {
+    font-size: 1.2em;
+    color: var(--color-primary-orange); /* Subtitle in orange */
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.section-main-title {
+    font-size: 3em;
+    color: var(--color-primary-blue); /* Main title in blue */
+    font-weight: bold;
+    margin-bottom: 20px;
+    position: relative; /* For the underline */
+    display: inline-block; /* To center the underline */
+}
+
+.section-title-underline {
+    width: 80px; /* Width of the underline */
+    height: 4px;
+    background-color: var(--color-primary-orange);
+    margin: 0 auto; /* Center the underline */
+    border-radius: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .section-main-title {
+        font-size: 2.5em;
+    }
+}
+
+@media (max-width: 768px) {
+    .section-title-container {
+        margin-bottom: 40px;
+    }
+    .section-subtitle {
+        font-size: 1.1em;
+    }
+    .section-main-title {
+        font-size: 2em;
+        margin-bottom: 15px;
+    }
+    .section-title-underline {
+        width: 60px;
+        height: 3px;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-title-container {
+        margin-bottom: 30px;
+    }
+    .section-subtitle {
+        font-size: 1em;
+    }
+    .section-main-title {
+        font-size: 1.6em;
+    }
+    .section-title-underline {
+        width: 50px;
+        height: 2px;
+    }
+}

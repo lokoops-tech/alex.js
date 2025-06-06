@@ -1,0 +1,166 @@
+/* src/pages/ProjectsPage.css */
+
+.projects-page {
+    /* Basic padding */
+}
+
+/* Projects Hero Banner */
+.projects-hero-banner {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background-image: url('/images/projects-hero-bg.jpg'); /* !!! IMPORTANT: Replace with actual image path !!! */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--color-light-text);
+    overflow: hidden;
+}
+
+.projects-hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+.projects-hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+}
+
+.projects-hero-title {
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--color-light-text);
+}
+
+.projects-hero-subtitle {
+    font-size: 1.3em;
+    color: var(--color-light-text);
+}
+
+/* Projects Portfolio Section */
+.projects-portfolio-section {
+    padding: 80px 0;
+    background-color: var(--color-background-light);
+}
+
+.filter-buttons {
+    text-align: center;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.filter-btn {
+    background-color: transparent;
+    color: var(--color-primary-blue);
+    border: 2px solid var(--color-primary-blue);
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+.filter-btn:hover {
+    background-color: var(--color-primary-blue);
+    color: var(--color-light-text);
+}
+
+.filter-btn.active {
+    background-color: var(--color-primary-orange);
+    color: var(--color-light-text);
+    border-color: var(--color-primary-orange);
+    transform: translateY(-2px); /* Slight lift for active */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.filter-btn.active:hover {
+    background-color: var(--color-accent-hover); /* Lighter orange for active hover */
+    border-color: var(--color-accent-hover);
+}
+
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 30px;
+}
+
+.no-projects-message {
+    text-align: center;
+    grid-column: 1 / -1; /* Span across all columns */
+    font-size: 1.2em;
+    color: #666;
+    padding: 50px 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .projects-hero-title {
+        font-size: 2.5em;
+    }
+    .projects-hero-subtitle {
+        font-size: 1.1em;
+    }
+    .projects-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .projects-hero-banner {
+        height: 250px;
+    }
+    .projects-hero-title {
+        font-size: 2em;
+    }
+    .projects-hero-subtitle {
+        font-size: 1em;
+    }
+    .projects-portfolio-section {
+        padding: 60px 0;
+    }
+    .filter-buttons {
+        gap: 10px;
+        margin-bottom: 30px;
+    }
+    .filter-btn {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+    .projects-grid {
+        grid-template-columns: 1fr; /* Stack projects on small screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .projects-hero-banner {
+        height: 200px;
+    }
+    .projects-hero-title {
+        font-size: 1.6em;
+    }
+    .projects-hero-subtitle {
+        font-size: 0.9em;
+    }
+    .projects-portfolio-section {
+        padding: 40px 0;
+    }
+    .filter-buttons {
+        flex-direction: column; /* Stack filter buttons */
+    }
+}

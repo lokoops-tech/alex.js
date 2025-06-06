@@ -1,0 +1,161 @@
+/* src/pages/TestimonialsPage.css */
+
+.testimonials-page {
+    /* Basic padding */
+}
+
+/* Testimonials Hero Banner */
+.testimonials-hero-banner {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background-image: url('/images/testimonials-hero-bg.jpg'); /* !!! IMPORTANT: Replace with actual image path !!! */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--color-light-text);
+    overflow: hidden;
+}
+
+.testimonials-hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+.testimonials-hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+}
+
+.testimonials-hero-title {
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--color-light-text);
+}
+
+.testimonials-hero-subtitle {
+    font-size: 1.3em;
+    color: var(--color-light-text);
+}
+
+/* Testimonials List Section */
+.testimonials-list-section {
+    padding: 80px 0;
+    background-color: var(--color-background-light);
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 30px;
+}
+
+/* Testimonials CTA Banner (similar to other CTAs) */
+.testimonials-cta-banner {
+    background-color:var(--color-primary-blue); /* blue background for CTA */
+    color: var(--color-light-text);
+    padding: 80px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonials-cta-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1); /* Subtle overlay */
+    z-index: 1;
+}
+
+.testimonials-cta-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.testimonials-cta-content h2 {
+    font-size: 2.8em;
+    color: var(--color-light-text);
+    margin-bottom: 20px;
+}
+
+.testimonials-cta-content p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    color: var(--color-light-text);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .testimonials-hero-title {
+        font-size: 2.5em;
+    }
+    .testimonials-hero-subtitle {
+        font-size: 1.1em;
+    }
+    .testimonials-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+    .testimonials-cta-content h2 {
+        font-size: 2.2em;
+    }
+    .testimonials-cta-content p {
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 768px) {
+    .testimonials-hero-banner {
+        height: 250px;
+    }
+    .testimonials-hero-title {
+        font-size: 2em;
+    }
+    .testimonials-hero-subtitle {
+        font-size: 1em;
+    }
+    .testimonials-list-section,
+    .testimonials-cta-banner {
+        padding: 60px 0;
+    }
+    .testimonials-grid {
+        grid-template-columns: 1fr; /* Stack on small screens */
+    }
+    .testimonials-cta-content h2 {
+        font-size: 1.8em;
+    }
+    .testimonials-cta-content p {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .testimonials-hero-banner {
+        height: 200px;
+    }
+    .testimonials-hero-title {
+        font-size: 1.6em;
+    }
+    .testimonials-hero-subtitle {
+        font-size: 0.9em;
+    }
+    .testimonials-list-section,
+    .testimonials-cta-banner {
+        padding: 40px 0;
+    }
+}

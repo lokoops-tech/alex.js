@@ -1,0 +1,110 @@
+/* src/components/TestimonialCard.css */
+
+.testimonial-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    height: 100%; /* Ensure cards in a grid are equal height */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.stars-container {
+    margin-bottom: 15px;
+}
+
+.stars-container .star {
+    font-size: 1.5em; /* Adjust star size */
+    color: #ffc107; /* Gold color for stars */
+    margin: 0 2px;
+}
+
+.testimonial-quote {
+    font-size: 1.1em;
+    font-style: italic;
+    color: var(--color-dark-text);
+    line-height: 1.7;
+    margin-bottom: 25px;
+    flex-grow: 1; /* Allows quote to take available space */
+}
+
+.testimonial-author-info {
+    display: flex;
+    flex-direction: column; /* Stack image and details vertically */
+    align-items: center;
+    margin-top: 20px;
+}
+
+.testimonial-author-img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 3px solid var(--color-primary-orange); /* Orange border around image */
+}
+
+.author-details {
+    text-align: center;
+}
+
+.testimonial-author {
+    font-size: 1.3em;
+    color: var(--color-primary-blue);
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.testimonial-meta {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.meta-separator {
+    margin: 0 5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .testimonial-card {
+        padding: 25px;
+    }
+    .testimonial-quote {
+        font-size: 1em;
+    }
+    .testimonial-author-img {
+        width: 60px;
+        height: 60px;
+    }
+    .testimonial-author {
+        font-size: 1.2em;
+    }
+}
+
+@media (max-width: 768px) {
+    .testimonial-card {
+        padding: 20px;
+    }
+    .testimonial-quote {
+        font-size: 0.95em;
+    }
+    .testimonial-author-img {
+        width: 50px;
+        height: 50px;
+    }
+    .testimonial-author {
+        font-size: 1.1em;
+    }
+    .stars-container .star {
+        font-size: 1.2em;
+    }
+}
