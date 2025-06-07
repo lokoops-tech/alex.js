@@ -3,7 +3,7 @@ import Button from '../Button/Button';
 import done from '../../Assets/arch.jpg';
 import craft from '../../Assets/craft3.jpeg';
 import hero from '../../Assets/new1.webp';
-import craft2 from '../../Assets/on.Webp';
+import craft2 from '../../Assets/cons1.jpg';
 import anime from '../../Assets/3D.jpg';
 import repair from '../../Assets/repair.jpg'
 import road from '../../Assets/road.jpg'
