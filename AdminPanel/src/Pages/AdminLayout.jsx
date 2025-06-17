@@ -4,6 +4,7 @@ import profileIcon from '../assets/avatar1.png';
 import BlogManager from './AddBlogManager';
 import ProjectManagementPage from './ProjectManagement';
 import ProjectForm from './ProjectForm';
+import EmployeeAdminSystem from './AdminSystem';
 import './AdminLayout.css';
 
 // Import your other components here
@@ -162,7 +163,7 @@ const AdminLayout = ({ children }) => {
               <Route path="/admin/addblog" element={<BlogManager />} />
               <Route path="/admin/inventory" element={<PlaceholderComponent title="Manage Inventory" />} />
               <Route path="/admin/adduser" element={<PlaceholderComponent title="Add User" />} />
-              <Route path="/admin/manageusers" element={<PlaceholderComponent title="Manage Employees" />} />
+              <Route path="/admin/manageusers" element={<EmployeeAdminSystem title="Manage Employees" />} />
               <Route path="/admin/settings" element={<PlaceholderComponent title="Settings" />} />
               <Route path="/admin/analytics" element={<PlaceholderComponent title="Analytics" />} />
               {/* Default route - redirect to dashboard */}

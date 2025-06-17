@@ -1,20 +1,42 @@
 const express = require('express');
+const multer = require('multer');
+const path = require('path');
 const Blog = require('../Models/Blog');
 
 const router = express.Router();
 
-// WebSocket setup function - call this from your main server file
+// Configure multer for file uploads
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'public/uploads/');
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({ 
+  storage: storage,
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype.startsWith('image/')) {
+      cb(null, true);
+    } else {
+      cb(new Error('Only image files are allowed!'), false);
+    }
+  }
+});
+
+// WebSocket setup function remains the same
 const setupWebSocket = (io) => {
     io.on('connection', (socket) => {
         console.log('Client connected to blog updates');
         
-        // Join blog-specific rooms
         socket.on('join-blog', (blogId) => {
             socket.join(`blog-${blogId}`);
             console.log(`Client joined blog room: ${blogId}`);
         });
         
-        // Leave blog-specific rooms
         socket.on('leave-blog', (blogId) => {
             socket.leave(`blog-${blogId}`);
             console.log(`Client left blog room: ${blogId}`);
@@ -25,7 +47,6 @@ const setupWebSocket = (io) => {
         });
     });
     
-    // Store io instance for use in routes
     router.io = io;
 };
 
@@ -33,7 +54,17 @@ const setupWebSocket = (io) => {
 router.get('/allblog', async (req, res) => {
     try {
         const blogs = await Blog.find().sort({ createdAt: -1 });
-        res.json(blogs);
+        // Map through blogs and convert image paths to full URLs
+        const blogsWithFullImageUrls = blogs.map(blog => {
+          if (blog.images && blog.images.length) {
+            const images = blog.images.map(image => {
+              return `${req.protocol}://${req.get('host')}/uploads/${image}`;
+            });
+            return { ...blog._doc, images };
+          }
+          return blog;
+        });
+        res.json(blogsWithFullImageUrls);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -44,7 +75,14 @@ router.get('/:id', async (req, res) => {
     try {
         const blog = await Blog.findById(req.params.id);
         if (blog) {
-            res.json(blog);
+          // Convert image paths to full URLs
+          if (blog.images && blog.images.length) {
+            const images = blog.images.map(image => {
+              return `${req.protocol}://${req.get('host')}/uploads/${image}`;
+            });
+            blog.images = images;
+          }
+          res.json(blog);
         } else {
             res.status(404).json({ message: 'Blog not found' });
         }
@@ -53,19 +91,30 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// Create new blog
-router.post('/newBlog', async (req, res) => {
-    const blog = new Blog({
-        title: req.body.title,
-        content: req.body.content,
-        author: req.body.author,
-        images: req.body.images || []
-    });
-
+// Create new blog with image upload support
+router.post('/newBlog', upload.array('images', 10), async (req, res) => {
     try {
+        const imageFiles = req.files ? req.files.map(file => file.filename) : [];
+        
+        const blog = new Blog({
+            title: req.body.title,
+            content: req.body.content,
+            author: req.body.author,
+            images: imageFiles,
+            projectType: req.body.projectType,
+            location: req.body.location,
+            status: req.body.status
+        });
+
         const newBlog = await blog.save();
         
-        // Emit new blog creation to all connected clients
+        // Convert image paths to full URLs for the response
+        if (newBlog.images && newBlog.images.length) {
+          newBlog.images = newBlog.images.map(image => {
+            return `${req.protocol}://${req.get('host')}/uploads/${image}`;
+          });
+        }
+        
         if (router.io) {
             router.io.emit('blog-created', {
                 id: newBlog._id,
@@ -82,16 +131,36 @@ router.post('/newBlog', async (req, res) => {
     }
 });
 
-// Update blog
-router.patch('/:id', async (req, res) => {
+// Update blog with image upload support
+router.patch('/:id', upload.array('images', 10), async (req, res) => {
     try {
         const blog = await Blog.findById(req.params.id);
         if (blog) {
             const oldTitle = blog.title;
-            Object.assign(blog, req.body);
+            
+            // Handle new image uploads
+            if (req.files && req.files.length) {
+                const newImages = req.files.map(file => file.filename);
+                blog.images = [...blog.images, ...newImages];
+            }
+            
+            // Update other fields
+            blog.title = req.body.title || blog.title;
+            blog.content = req.body.content || blog.content;
+            blog.author = req.body.author || blog.author;
+            blog.projectType = req.body.projectType || blog.projectType;
+            blog.location = req.body.location || blog.location;
+            blog.status = req.body.status || blog.status;
+            
             const updatedBlog = await blog.save();
             
-            // Emit blog update to clients in the specific blog room
+            // Convert image paths to full URLs for the response
+            if (updatedBlog.images && updatedBlog.images.length) {
+              updatedBlog.images = updatedBlog.images.map(image => {
+                return `${req.protocol}://${req.get('host')}/uploads/${image}`;
+              });
+            }
+            
             if (router.io) {
                 router.io.to(`blog-${req.params.id}`).emit('blog-updated', {
                     id: updatedBlog._id,
@@ -101,7 +170,6 @@ router.patch('/:id', async (req, res) => {
                     message: 'Blog post has been updated'
                 });
                 
-                // Also emit to general room for blog list updates
                 router.io.emit('blog-list-updated', {
                     action: 'updated',
                     blog: updatedBlog
@@ -124,7 +192,6 @@ router.delete('/:id', async (req, res) => {
         if (blog) {
             await blog.deleteOne();
             
-            // Emit blog deletion to all connected clients
             if (router.io) {
                 router.io.emit('blog-deleted', {
                     id: req.params.id,
@@ -142,29 +209,43 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-// Add progress update endpoint for construction blogs
-router.post('/:id/progress', async (req, res) => {
+// Add progress update with image upload support
+router.post('/:id/progress', upload.array('images', 10), async (req, res) => {
     try {
         const blog = await Blog.findById(req.params.id);
         if (blog) {
+            const imageFiles = req.files ? req.files.map(file => file.filename) : [];
+            
             const progressUpdate = {
                 update: req.body.update,
                 timestamp: new Date(),
-                images: req.body.images || []
+                images: imageFiles
             };
             
-            // Add progress update to blog content or create a progress field
             blog.content += `\n\n**Progress Update (${progressUpdate.timestamp.toLocaleDateString()}):** ${progressUpdate.update}`;
+            
+            if (imageFiles.length) {
+                blog.images = [...blog.images, ...imageFiles];
+            }
+            
             const updatedBlog = await blog.save();
             
-            // Emit progress update to clients
+            // Convert image paths to full URLs for the response
+            if (updatedBlog.images && updatedBlog.images.length) {
+              updatedBlog.images = updatedBlog.images.map(image => {
+                return `${req.protocol}://${req.get('host')}/uploads/${image}`;
+              });
+            }
+            
             if (router.io) {
                 router.io.to(`blog-${req.params.id}`).emit('progress-update', {
                     blogId: req.params.id,
                     title: blog.title,
                     update: progressUpdate.update,
                     timestamp: progressUpdate.timestamp,
-                    images: progressUpdate.images,
+                    images: progressUpdate.images.map(img => 
+                      `${req.protocol}://${req.get('host')}/uploads/${img}`
+                    ),
                     message: 'Construction progress updated!'
                 });
             }
