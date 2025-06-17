@@ -1,0 +1,78 @@
+/* src/styles/global.css */
+
+/* CSS Variables for your theme */
+:root {
+    --color-primary-blue: #0056b3; /* A strong blue for professionalism */
+    --color-primary-orange: #ff6600; /* A vibrant orange for energy/CTAs */
+    --color-dark-text: #333;
+    --color-light-text: #f8f8f8;
+    --color-background-light: #f8f8f8;
+    --color-background-dark: #2c3e50; /* For footers/dark sections */
+    --color-accent-hover: #ff8800; /* Lighter orange for hover effects */
+    --color-border-light: #ddd;
+}
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Arial', sans-serif; /* You can replace with Google Fonts later */
+    line-height: 1.6;
+    color: var(--color-dark-text);
+    background-color: var(--color-background-light);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Base Typography */
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 0.8em;
+    line-height: 1.2;
+    color: var(--color-primary-blue); /* Headings typically blue */
+}
+
+h1 { font-size: 2.5em; }
+h2 { font-size: 2em; }
+h3 { font-size: 1.75em; }
+p { margin-bottom: 1em; }
+
+a {
+    color: var(--color-primary-blue);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--color-primary-orange);
+}
+
+/* Utility Classes (optional, but can be helpful) */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}

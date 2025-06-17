@@ -1,0 +1,194 @@
+/* src/admin/pages/ProjectManagementPage.css */
+
+.project-management-container {
+    padding: 20px;
+    background-color: #f8f9fa;
+    min-height: calc(100vh - 80px); /* Adjust based on your header height */
+}
+
+.projects-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.projects-header h1 {
+    font-size: 2.2em;
+    color: var(--color-primary-blue);
+    margin: 0;
+}
+
+.projects-header button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    font-size: 1em;
+}
+
+.projects-table-wrapper {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow-x: auto; /* For responsiveness on small screens */
+}
+
+.projects-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95em;
+}
+
+.projects-table th,
+.projects-table td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.projects-table th {
+    background-color: var(--color-primary-blue);
+    color: var(--color-light-text);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.projects-table tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+.projects-table td {
+    color: #333;
+}
+
+.actions-cell {
+    white-space: nowrap; /* Keep buttons on one line */
+}
+
+.actions-cell button {
+    margin-right: 5px;
+    padding: 8px; /* Make buttons smaller for table cells */
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+
+/* Ensure your Button component supports these variants */
+.actions-cell .Button[variant="ghost"] {
+    background: none;
+    border: 1px solid transparent;
+    color: var(--color-dark-text);
+}
+.actions-cell .Button[variant="ghost"]:hover {
+    background-color: #e0e0e0;
+}
+.actions-cell .Button[variant="danger-ghost"] {
+    background: none;
+    border: 1px solid transparent;
+    color: #dc3545;
+}
+.actions-cell .Button[variant="danger-ghost"]:hover {
+    background-color: #ffe0e0;
+    color: #c82333;
+}
+
+
+.no-projects-message {
+    text-align: center;
+    padding: 50px;
+    color: #666;
+    font-size: 1.1em;
+}
+
+.error-message {
+    color: #dc3545;
+    background-color: #ffe0e0;
+    border: 1px solid #dc3545;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Modal specific styles for confirmation/details */
+.delete-confirmation-modal,
+.project-details-modal {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 500px;
+    margin: auto; /* Center the modal content */
+}
+
+.delete-confirmation-modal h2,
+.project-details-modal h2 {
+    color: var(--color-primary-blue);
+    margin-bottom: 15px;
+    font-size: 1.8em;
+}
+
+.delete-confirmation-modal p {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+.project-details-modal p {
+    text-align: left;
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.project-detail-thumbnail,
+.project-detail-gallery {
+    margin-top: 20px;
+    border-top: 1px dashed #eee;
+    padding-top: 20px;
+}
+
+.project-detail-thumbnail h3,
+.project-detail-gallery h3 {
+    text-align: left;
+    font-size: 1.2em;
+    color: var(--color-dark-blue);
+    margin-bottom: 15px;
+}
+
+.project-detail-thumbnail img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.project-detail-gallery .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.project-detail-gallery .gallery-grid img {
+    width: 100%;
+    height: 100px; /* Fixed height for gallery images */
+    object-fit: cover;
+    border-radius: 6px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+
+.project-detail-gallery .gallery-grid img:hover {
+    transform: scale(1.05);
+}
+
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+}

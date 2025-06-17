@@ -1,0 +1,60 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Quote Request Confirmation</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background-color: #007bff; color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0; }
+        .content { padding: 30px; background-color: #f9f9f9; }
+        .quote-details { background-color: white; padding: 20px; margin: 20px 0; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .status-badge { background-color: #17a2b8; color: white; padding: 5px 12px; border-radius: 15px; font-size: 12px; display: inline-block; margin: 10px 0; }
+        .footer { text-align: center; padding: 20px; font-size: 12px; color: #666; background-color: #f8f9fa; border-radius: 0 0 8px 8px; }
+        .highlight { color: #007bff; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✅ Quote Request Received</h1>
+        </div>
+        <div class="content">
+            <p>Dear <strong>{{clientName}}</strong>,</p>
+            
+            <p>Thank you for submitting your quote request! We have successfully received your project details and our team is now reviewing your requirements.</p>
+            
+            <div class="status-badge">Under Review</div>
+            
+            <div class="quote-details">
+                <h3>📋 Quote Details:</h3>
+                <p><strong>Quote Number:</strong> <span class="highlight">{{quoteNumber}}</span></p>
+                <p><strong>Project Title:</strong> {{projectTitle}}</p>
+                <p><strong>Description:</strong> {{projectDescription}}</p>
+                <p><strong>Estimated Total:</strong> <span class="highlight">${{totalAmount}}</span></p>
+                <p><strong>Submitted:</strong> {{createdAt}}</p>
+            </div>
+            
+            <div style="background-color: #e3f2fd; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                <h4>🔍 What happens next?</h4>
+                <ol>
+                    <li>Our team will carefully review your project requirements</li>
+                    <li>We'll prepare a detailed quote with itemized costs</li>
+                    <li>You'll receive the complete quote via email within 1-2 business days</li>
+                    <li>You can then review and decide on the next steps</li>
+                </ol>
+            </div>
+            
+            <p>If you need to provide additional information or have any questions about your quote request, please don't hesitate to contact us and reference your quote number: <strong>{{quoteNumber}}</strong></p>
+            
+            <p>We appreciate your interest in our services and look forward to working with you!</p>
+            
+            <p>Best regards,<br><strong>The Quote Team</strong></p>
+        </div>
+        <div class="footer">
+            <p>This is an automated confirmation. Please save this email for your records.</p>
+            <p>Quote Reference: {{quoteNumber}} | Status: Under Review</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+.related{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    width: 100%;
+    overflow: hidden;
+    height: 100vh;
+
+
+}
+.related h1{
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    color: grey;
+    font-weight: 700;
+}
+
+.relatedproducts{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+}

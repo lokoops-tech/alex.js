@@ -1,0 +1,114 @@
+/* src/admin/pages/LoginPage.css */
+
+.admin-login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--color-background-light); /* Light background */
+    background-image: url('../Assets/login.jpg'); /* !!! IMPORTANT: Add a background image for login !!! */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.admin-login-page::before { /* Overlay for background image */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    z-index: 1;
+}
+
+.admin-login-card {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    z-index: 2; /* Above the overlay */
+    text-align: center;
+}
+
+.login-title {
+    font-size: 2.2em;
+    color: var(--color-primary-blue);
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.login-form .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.login-form label {
+    display: block;
+    font-size: 0.95em;
+    color: var(--color-dark-text);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    color: var(--color-dark-text);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-form input:focus {
+    border-color: var(--color-primary-orange);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.2);
+}
+
+.login-error {
+    color: #dc3545; /* Red for errors */
+    font-size: 0.9em;
+    margin-top: -10px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.login-button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.login-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .admin-login-card {
+        padding: 30px;
+        margin: 20px; /* Add margin on smaller screens */
+    }
+    .login-title {
+        font-size: 1.8em;
+        margin-bottom: 25px;
+    }
+    .login-form input {
+        padding: 10px 12px;
+        font-size: 0.95em;
+    }
+    .login-button {
+        padding: 10px;
+        font-size: 1em;
+    }
+}

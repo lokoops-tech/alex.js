@@ -1,0 +1,209 @@
+/* src/admin/components/AdminLayout.css */
+
+.admin-dashboard-layout {
+    display: flex;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif; /* Or your preferred admin font */
+    background-color: #f0f2f5; /* Light gray background for content */
+}
+
+/* Sidebar */
+.admin-sidebar {
+    width: 250px;
+    background-color: var(--color-dark-blue); /* Dark blue background */
+    color: var(--color-light-text);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Ensure sidebar is above main content */
+    position: sticky;
+    top: 0;
+    height: 100vh; /* Full height */
+    overflow-y: auto; /* Scrollable if content overflows */
+}
+
+.sidebar-header {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.admin-logo {
+    font-size: 1.8em;
+    color: var(--color-primary-orange); /* Admin panel branding color */
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li {
+    margin-bottom: 10px;
+}
+
+.sidebar-nav .nav-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar-nav .nav-item svg {
+    margin-right: 10px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.sidebar-nav .nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-light-text);
+}
+
+.sidebar-nav .nav-item.active {
+    background-color: var(--color-primary-orange); /* Active item highlight */
+    color: var(--color-dark-blue);
+    font-weight: bold;
+}
+
+.sidebar-nav .nav-item.active svg {
+    color: var(--color-dark-blue);
+}
+
+.sidebar-footer {
+    margin-top: auto; /* Pushes the logout button to the bottom */
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.logout-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #dc3545; /* Red color for logout */
+    color: var(--color-light-text);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #c82333;
+}
+
+/* Main Content Area */
+.admin-main-content {
+    flex-grow: 1; /* Takes remaining space */
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-header {
+    background-color: #fff;
+    padding: 20px 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.admin-page-title {
+    font-size: 1.8em;
+    color: var(--color-primary-blue);
+    margin: 0;
+}
+
+.admin-content-area {
+    flex-grow: 1;
+    padding: 30px;
+    overflow-y: auto; /* Allow content to scroll if it's too long */
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .admin-sidebar {
+        width: 200px; /* Slightly narrower sidebar */
+        padding: 15px;
+    }
+    .admin-logo {
+        font-size: 1.6em;
+    }
+    .admin-header {
+        padding: 15px 20px;
+    }
+    .admin-page-title {
+        font-size: 1.5em;
+    }
+    .admin-content-area {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .admin-dashboard-layout {
+        flex-direction: column;
+    }
+    .admin-sidebar {
+        width: 100%;
+        height: auto;
+        max-height: 80px; /* Collapse sidebar to a header bar */
+        flex-direction: row; /* Layout items horizontally */
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        position: static; /* No longer sticky */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        overflow-y: visible;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .sidebar-header {
+        margin-bottom: 0;
+    }
+    .sidebar-nav {
+        display: none; /* Hide main nav items, will use a hamburger menu later if needed */
+    }
+    .sidebar-footer {
+        margin-top: 0;
+        border-top: none;
+    }
+    .logout-btn {
+        width: auto; /* Allow button to size naturally */
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+    .admin-main-content {
+        /* No change needed here */
+    }
+    .admin-header {
+        /* Might be redundant if sidebar acts as header */
+        display: none; /* Hide this header if sidebar is collapsed to top */
+    }
+    .admin-content-area {
+        padding-top: 20px; /* Adjust padding after collapsed sidebar */
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-logo {
+        font-size: 1.5em;
+    }
+    .logout-btn {
+        font-size: 0.85em;
+        padding: 6px 12px;
+    }
+    .admin-content-area {
+        padding: 15px;
+    }
+}

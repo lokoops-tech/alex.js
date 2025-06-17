@@ -1,0 +1,213 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.container{
+    display: flex;
+    margin-left:30px ;
+    gap: 30px;
+}
+.text-left{
+    margin-top:250px;
+    align-items: center;
+    text-align: center;
+}
+.text-left h1{
+    font-size: 40px;
+    line-height: 1.8;
+}
+.text-left h1 span{
+    background:linear-gradient(45deg,rgb(235, 10, 205) 20%,  rgb(236, 144, 6)90.25%) ;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.text-left button{
+    margin-top: 70px;
+    font-size: 16px;
+    padding: 10px 15px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    border: none;
+    outline: none;
+    background: linear-gradient(45deg,rgb(10, 10, 10) 20%,  rgb(236, 144, 6)90.25%);
+    color:white;
+    cursor: pointer;
+}
+.hero-rigth{
+    margin-top: 10px;
+}
+.hero-{
+    display: none;
+}
+@media(max-width:1280px){
+
+    .container{
+        gap: 25px;
+    }
+    .text-left{
+        margin-top:200px;
+        align-items: center;
+        text-align: center;
+    }
+    .text-left h1{
+        font-size: 25px;
+        line-height: 1.8;
+        margin-left: 30px;
+    }
+    .text-left h1 span{
+        background:linear-gradient(45deg,rgb(235, 10, 205) 20%,  rgb(236, 144, 6)90.25%) ;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .text-left button{
+        margin-top: 50px;
+        font-size: 10px;
+        padding: 10px 15px;
+        border-radius: 50px;
+      
+    }
+    .hero-{
+        display: none;
+    }
+    .hero-rigth{
+        margin:30px 50px
+    }
+    .hero-rigth img{
+        width: 750px;
+        margin: 20px 30px;
+    }
+}
+@media(max-width:1024px){
+
+    .container{
+        gap: 30px;
+        display: grid;
+        flex-direction: column;
+    }
+    .text-left{
+        margin-top:100px;
+        align-items: center;
+        text-align: center;
+    }
+    .text-left h1{
+        font-size: 30px;
+        line-height: 1.8;
+        margin-left: 30px;
+    }
+    .text-left h1 span{
+        background:linear-gradient(45deg,rgb(235, 10, 205) 20%,  rgb(236, 144, 6)90.25%) ;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .text-left button{
+        margin-top: 50px;
+        font-size: 10px;
+        padding: 10px 15px;
+        border-radius: 50px;
+      
+    }
+    .hero-rigth{
+        display: none;
+        margin-top: 10px;
+        margin-left: 60px;
+        align-items: center;
+        justify-content: center;
+        
+    }
+    .hero-{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 30px;
+        margin-right: 30px;
+        margin-top: 60px;
+    }
+    .hero- img{
+        width: 650px;
+    }
+}
+@media(max-width:800px){
+
+    .container{
+        gap: 30px;
+        display: grid;
+        flex-direction: column;
+    }
+    .text-left{
+        align-items: center;
+        text-align: center;
+    }
+    .text-left h1{
+        font-size: 25px;
+        line-height: 1.8;
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+    .text-left h1 span{
+        background:linear-gradient(45deg,rgb(235, 10, 205) 20%,  rgb(236, 144, 6)90.25%) ;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .text-left button{
+        margin-top: 10px;
+        font-size: 10px;
+        padding: 10px 15px;
+        border-radius: 50px;
+      
+    }
+    .hero-{
+        align-items: center;
+        justify-content: center;
+        margin: 60px 40px;
+        
+    }
+    .hero- img{
+        width: 580px;
+       
+    }
+}
+
+@media(max-width:500px){
+
+    .container{
+        gap: 30px;
+        display: grid;
+        flex-direction: column;
+    }
+    .text-left{
+        width: fit-content;
+        margin-top:40px;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 100px;
+    }
+    .text-left h1{
+        font-size: 20px;
+        line-height: 1.8;
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+    .text-left h1 span{
+        background:linear-gradient(45deg,rgb(235, 10, 205) 20%,  rgb(236, 144, 6)90.25%) ;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+}
+    .text-left button{
+        margin-top: 30px;
+        font-size: 10px;
+        padding: 10px 15px;
+        border-radius: 50px;
+      
+}
+.hero-rigth img{
+height: 0;
+width: 0;
+display: none;
+}
+
+.hero- img{
+display: none;
+
+        
+    }
+}
