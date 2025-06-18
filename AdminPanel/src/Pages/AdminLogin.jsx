@@ -3,7 +3,7 @@ import './AdminLogin.css'; // Import the CSS file we created earlier
 
 const API_BASE_URL = 'http://localhost:5000'; // Adjust this to your API base URL
 
-const AdminAuth = () => {
+const AdminAuth = ({ onLoginSuccess }) => {
     const [isLogin, setIsLogin] = useState(true);
     const [formData, setFormData] = useState({
         username: '',
@@ -82,13 +82,24 @@ const AdminAuth = () => {
                 setMessageType('success');
                 
                 if (isLogin && data.token) {
-                    // Store token in localStorage or handle authentication
+                    // Store token in localStorage
                     localStorage.setItem('adminToken', data.token);
                     localStorage.setItem('adminData', JSON.stringify(data.admin));
                     console.log('Admin logged in:', data.admin);
+                    
+                    // Call the success callback to redirect to dashboard
+                    setTimeout(() => {
+                        onLoginSuccess();
+                    }, 1000); // Small delay to show success message
+                } else if (!isLogin) {
+                    // For signup, switch to login mode
+                    setTimeout(() => {
+                        setIsLogin(true);
+                        setFormData({ username: '', email: '', password: '' });
+                        setMessage('Account created! Please sign in.');
+                        setMessageType('success');
+                    }, 1500);
                 }
-                
-                setFormData({ username: '', email: '', password: '' });
             } else {
                 setMessage(data.message || 'An error occurred');
                 setMessageType('error');

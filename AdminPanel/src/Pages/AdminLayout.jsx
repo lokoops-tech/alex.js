@@ -15,11 +15,14 @@ import './AdminLayout.css';
 // import Settings from './Settings';
 // import Analytics from './Analytics';
 
-const AdminLayout = ({ children }) => {
+const AdminLayout = ({ children, onLogout }) => {
   const [activeMenuItem, setActiveMenuItem] = useState('dashboard');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+
+  // Get admin data from localStorage
+  const adminData = JSON.parse(localStorage.getItem('adminData') || '{}');
 
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: '📊', path: '/admin/dashboard' },
@@ -42,6 +45,13 @@ const AdminLayout = ({ children }) => {
     }
   }, [location.pathname]);
 
+  // Navigate to dashboard by default when component mounts
+  useEffect(() => {
+    if (location.pathname === '/admin' || location.pathname === '/admin/') {
+      navigate('/admin/dashboard', { replace: true });
+    }
+  }, [navigate, location.pathname]);
+
   const handleMenuClick = (menuId) => {
     const menuItem = menuItems.find(item => item.id === menuId);
     if (menuItem) {
@@ -54,12 +64,18 @@ const AdminLayout = ({ children }) => {
     setSidebarCollapsed(!sidebarCollapsed);
   };
 
+  const handleLogout = () => {
+    if (window.confirm('Are you sure you want to logout?')) {
+      onLogout();
+    }
+  };
+
   // Dashboard component
   const Dashboard = () => (
     <div className="default-content">
       <div className="welcome-card">
         <h2>Welcome to Admin Dashboard</h2>
-        <p>Select an option from the sidebar to get started.</p>
+        <p>Hello {adminData.username || adminData.email}! Select an option from the sidebar to get started.</p>
         <div className="quick-actions">
           <button 
             className="quick-action-btn"
@@ -126,7 +142,11 @@ const AdminLayout = ({ children }) => {
         </nav>
         
         <div className="sidebar-footer">
-          <button className="logout-btn" title={sidebarCollapsed ? 'Logout' : ''}>
+          <button 
+            className="logout-btn" 
+            onClick={handleLogout}
+            title={sidebarCollapsed ? 'Logout' : ''}
+          >
             <span className="nav-icon">🚪</span>
             {!sidebarCollapsed && <span>Logout</span>}
           </button>
@@ -147,7 +167,7 @@ const AdminLayout = ({ children }) => {
               <button className="notification-btn">🔔</button>
               <div className="user-profile">
                 <img src={profileIcon} alt="Profile" className="profile-avatar" />
-                <span className="profile-name">Admin User</span>
+                <span className="profile-name">{adminData.username || adminData.email || 'Admin User'}</span>
               </div>
             </div>
           </div>
@@ -157,18 +177,18 @@ const AdminLayout = ({ children }) => {
         <div className="admin-content">
           <div className="content-wrapper">
             <Routes>
-              <Route path="/admin/dashboard" element={<Dashboard />} />
-              <Route path="/admin/addproject" element={<ProjectForm title="Add Project" />} />
-              <Route path="/admin/manageprojects" element={<ProjectManagementPage />} />
-              <Route path="/admin/addblog" element={<BlogManager />} />
-              <Route path="/admin/inventory" element={<PlaceholderComponent title="Manage Inventory" />} />
-              <Route path="/admin/adduser" element={<PlaceholderComponent title="Add User" />} />
-              <Route path="/admin/manageusers" element={<EmployeeAdminSystem title="Manage Employees" />} />
-              <Route path="/admin/settings" element={<PlaceholderComponent title="Settings" />} />
-              <Route path="/admin/analytics" element={<PlaceholderComponent title="Analytics" />} />
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="addproject" element={<ProjectForm title="Add Project" />} />
+              <Route path="manageprojects" element={<ProjectManagementPage />} />
+              <Route path="addblog" element={<BlogManager />} />
+              <Route path="manageblogs" element={<PlaceholderComponent title="Manage Inventory" />} />
+              <Route path="adduser" element={<PlaceholderComponent title="Add User" />} />
+              <Route path="manageusers" element={<EmployeeAdminSystem title="Manage Employees" />} />
+              <Route path="settings" element={<PlaceholderComponent title="Settings" />} />
+              <Route path="analytics" element={<PlaceholderComponent title="Analytics" />} />
               {/* Default route - redirect to dashboard */}
-              <Route path="/admin" element={<Dashboard />} />
-              <Route path="/admin/*" element={<Dashboard />} />
+              <Route index element={<Dashboard />} />
+              <Route path="*" element={<Dashboard />} />
             </Routes>
             {children}
           </div>
